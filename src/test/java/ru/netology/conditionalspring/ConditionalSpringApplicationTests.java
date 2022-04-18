@@ -1,5 +1,6 @@
 package ru.netology.conditionalspring;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,10 @@ class ConditionalSpringApplicationTests {
     @Test
     void contextLoads() {
         ResponseEntity<String> forEntityDev = restTemplate.getForEntity("http://localhost:" + devapp.getMappedPort(8080), String.class);
-        System.out.println(forEntityDev.getBody());
+        Assertions.assertEquals("Current profile is dev", forEntityDev.getBody());
 
         ResponseEntity<String> forEntityProd = restTemplate.getForEntity("http://localhost:" + prodapp.getMappedPort(8080), String.class);
-        System.out.println(forEntityProd.getBody());
+        Assertions.assertEquals("Current profile is production", forEntityProd.getBody());
 
     }
 
