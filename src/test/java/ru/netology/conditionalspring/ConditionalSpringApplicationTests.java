@@ -25,16 +25,27 @@ class ConditionalSpringApplicationTests {
 
 //    @BeforeAll
 //    public static void setUp() {
-//
+//        devapp.start();
+//        prodapp.start();
 //    }
 
     @Test
     void contextLoads() {
-        ResponseEntity<String> forEntityDev = restTemplate.getForEntity("http://localhost:" + devapp.getMappedPort(8080), String.class);
-        Assertions.assertEquals("Current profile is dev", forEntityDev.getBody());
+        ResponseEntity<String> forEntityDev = restTemplate
+                .getForEntity("http://localhost:"
+                        + devapp.getMappedPort(8080)
+                        + "/profile",
+                        String.class);
+        Assertions.assertEquals("Current profile is dev",
+                forEntityDev.getBody());
 
-        ResponseEntity<String> forEntityProd = restTemplate.getForEntity("http://localhost:" + prodapp.getMappedPort(8080), String.class);
-        Assertions.assertEquals("Current profile is production", forEntityProd.getBody());
+        ResponseEntity<String> forEntityProd = restTemplate
+                .getForEntity("http://localhost:"
+                        + prodapp.getMappedPort(8081)
+                        + "/profile",
+                        String.class);
+        Assertions.assertEquals("Current profile is production",
+                forEntityProd.getBody());
 
     }
 
