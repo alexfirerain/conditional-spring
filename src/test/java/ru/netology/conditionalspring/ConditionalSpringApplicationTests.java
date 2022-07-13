@@ -31,6 +31,10 @@ class ConditionalSpringApplicationTests {
 
     @Test
     void contextLoads() {
+
+    }
+    @Test
+    void devAppRises() {
         ResponseEntity<String> forEntityDev = restTemplate
                 .getForEntity("http://localhost:"
                         + devapp.getMappedPort(8080)
@@ -38,7 +42,9 @@ class ConditionalSpringApplicationTests {
                         String.class);
         Assertions.assertEquals("Current profile is dev",
                 forEntityDev.getBody());
-
+    }
+    @Test
+    void prodAppRises() {
         ResponseEntity<String> forEntityProd = restTemplate
                 .getForEntity("http://localhost:"
                         + prodapp.getMappedPort(8081)
